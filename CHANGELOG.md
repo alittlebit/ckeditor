@@ -1,5 +1,9 @@
 # Ckeditor changelog
 
+## Ckeditor 4.3.1
+
+  * Fix attachments_files index collection (November 2024)
+
 ## NEXT
   * None
 
