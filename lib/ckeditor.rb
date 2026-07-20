@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'orm_adapter'
 require 'pathname'
 require 'addressable/uri'
@@ -20,13 +22,16 @@ module Ckeditor
     autoload :SimpleFormBuilder, 'ckeditor/hooks/simple_form'
     autoload :CanCanAuthorization, 'ckeditor/hooks/cancan'
     autoload :PunditAuthorization, 'ckeditor/hooks/pundit'
+    autoload :ActionPolicyAuthorization, 'ckeditor/hooks/action_policy'
   end
 
   module Backend
+    autoload :ActiveStorage, 'ckeditor/backend/active_storage'
     autoload :Paperclip, 'ckeditor/backend/paperclip'
     autoload :CarrierWave, 'ckeditor/backend/carrierwave'
     autoload :Dragonfly, 'ckeditor/backend/dragonfly'
     autoload :Refile, 'ckeditor/backend/refile'
+    autoload :Shrine, 'ckeditor/backend/shrine'
   end
 
   IMAGE_TYPES = %w[image/jpeg image/png image/gif image/jpg image/pjpeg image/tiff image/x-png].freeze
@@ -202,11 +207,11 @@ module Ckeditor
   #   end
   #
   # To use an authorization adapter, pass the name of the adapter. For example,
-  # to use with CanCan[https://github.com/ryanb/cancan], pass it like this.
+  # to use with CanCanCan[https://github.com/CanCanCommunity/cancancan], pass it like this.
   #
-  # @example CanCan
+  # @example CanCanCan
   #   Ckeditor.setup do |config|
-  #     config.authorize_with :cancan
+  #     config.authorize_with :cancancan
   #   end
   #
   def self.authorize_with(*args, &block)

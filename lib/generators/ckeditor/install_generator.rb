@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails/generators'
 require 'rails/generators/migration'
 
@@ -13,7 +15,7 @@ module Ckeditor
                          desc: 'Backend processor for upload support'
 
       class_option :backend, type: :string, default: 'paperclip',
-                             desc: 'paperclip (default), carrierwave, refile or dragonfly'
+                             desc: 'paperclip (default), active_storage, carrierwave, refile or dragonfly'
 
       def self.source_root
         @source_root ||= File.expand_path(File.join(File.dirname(__FILE__), 'templates'))
@@ -29,6 +31,10 @@ module Ckeditor
 
         if backend_dragonfly?
           template 'base/dragonfly/initializer.rb', 'config/initializers/ckeditor_dragonfly.rb'
+        end
+
+        if backend_shrine?
+          template 'base/shrine/initializer.rb', 'config/initializers/ckeditor_shrine.rb'
         end
       end
 
@@ -51,6 +57,21 @@ module Ckeditor
         end
       end
 
+      def create_uploaders
+        if backend_carrierwave?
+          template "#{uploaders_dir}/ckeditor_attachment_file_uploader.rb",
+                   File.join('app/uploaders', 'ckeditor_attachment_file_uploader.rb')
+
+          template "#{uploaders_dir}/ckeditor_picture_uploader.rb",
+                   File.join('app/uploaders', 'ckeditor_picture_uploader.rb')
+        end
+
+        if backend_shrine?
+          template "#{uploaders_dir}/ckeditor_attachment_uploader.rb",
+                   File.join('app/uploaders', 'ckeditor_attachment_uploader.rb')
+        end
+      end
+
       def create_ckeditor_migration
         if ['active_record'].include?(orm)
           migration_template "#{generator_dir}/#{migration_file}.rb",
@@ -67,6 +88,10 @@ module Ckeditor
 
       def backend_dragonfly?
         backend == 'dragonfly'
+      end
+
+      def backend_shrine?
+        backend == 'shrine'
       end
 
       def ckeditor_dir

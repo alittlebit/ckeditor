@@ -31,7 +31,13 @@ CKEDITOR.editorConfig = function( config )
   // The location of a script that handles file uploads.
   config.filebrowserUploadUrl = "/ckeditor/attachment_files";
 
+  // Avoid the uploadimage plugin logging a "clipboard-image-handling-disabled"
+  // warning: it disables this itself at init since filebrowserImageUploadUrl
+  // is set, so we set it upfront instead.
+  config.clipboard_handleImages = false;
+
   config.allowedContent = true;
+  config.filebrowserUploadMethod = 'form';
 
   // Toolbar groups configuration.
   config.toolbar = [

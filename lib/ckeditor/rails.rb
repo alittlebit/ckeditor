@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Ckeditor
   class Engine < ::Rails::Engine
     isolate_namespace Ckeditor
@@ -24,6 +26,7 @@ module Ckeditor
 
       require 'ckeditor/hooks/cancan' if Object.const_defined?('CanCan')
       require 'ckeditor/hooks/pundit' if Object.const_defined?('Pundit')
+      require 'ckeditor/hooks/action_policy' if Object.const_defined?('ActionPolicy')
     end
 
     rake_tasks do

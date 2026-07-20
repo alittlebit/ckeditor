@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'cancan'
 
 module Ckeditor
   module Hooks
-    # This adapter is for the CanCan[https://github.com/ryanb/cancan] authorization library.
+    # This adapter is for the CanCanCan[https://github.com/CanCanCommunity/cancancan] authorization library.
     # You can create another adapter for different authorization behavior, just be certain it
     # responds to each of the public methods here.
     class CanCanAuthorization
@@ -45,3 +47,4 @@ module Ckeditor
 end
 
 Ckeditor::AUTHORIZATION_ADAPTERS[:cancan] = Ckeditor::Hooks::CanCanAuthorization
+Ckeditor::AUTHORIZATION_ADAPTERS[:cancancan] = Ckeditor::Hooks::CanCanAuthorization

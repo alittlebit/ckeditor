@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'action_view/helpers/tag_helper'
 require 'action_view/helpers/javascript_helper'
 
@@ -9,14 +11,16 @@ module Ckeditor
     FUNCTION = 'window.parent.CKEDITOR.tools.callFunction'.freeze
     JSON_TYPE = 'json'.freeze
 
-    attr_reader :asset, :params
+    attr_reader :asset, :request, :params
 
     def initialize(asset, request)
       @asset = asset
       @request = request
       @params = request.params
+    end
 
-      @asset.data = Ckeditor::Http.normalize_param(file, @request)
+    def data
+      @data ||= read_data
     end
 
     def json?
@@ -103,6 +107,13 @@ module Ckeditor
       else
         :default
       end
+    end
+
+    def read_data
+      data = Ckeditor::Http.normalize_param(file, request)
+      return if data.size.zero? || data.original_filename.blank?
+
+      data
     end
   end
 end

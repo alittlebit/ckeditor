@@ -1,5 +1,33 @@
 # Ckeditor changelog
 
+## Ckeditor 5.1.2 (unreleased)
+
+  * Upgrade CKEditor to 4.22.1 version
+  * Bump ruby version to 2.7.6
+  * Temporarily turn off paperclip gem support
+
+## Ckeditor 5.1.1 (12-1-2021)
+
+  * Add hook for action_policy support
+  * Update gems to fix potential security vulnerabilities
+
+## Ckeditor 5.1.0 (06-03-2020)
+
+  * Add Active Storage backend support
+  * Add Shrine backend support
+
+## Ckeditor 5.0.0
+
+  * CDN version only (breaking changes)
+  * Upgrade rails to 5.2.x
+  * Remove refile support due no activity since 2015
+  * Remove auto-detect content-type (`extract_content_type`) and image dimensions (`extract_dimensions`)
+  * Fix crash on "upload file" 3rd tab
+
+  **COMPATIBILITY WARNING**
+
+  Remove `extract_dimensions` or `extract_content_type` in uploader `process` call
+
 ## Ckeditor 4.3.1
 
   * Fix attachments_files index collection (November 2024)

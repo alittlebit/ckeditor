@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Use this hook to configure ckeditor
 Ckeditor.setup do |config|
   # ==> ORM configuration
@@ -23,7 +25,7 @@ Ckeditor.setup do |config|
 
   # Setup authorization to be run as a before filter
   # By default: there is no authorization.
-  # config.authorize_with :cancan
+  # config.authorize_with :cancancan
 
   # Override parent controller CKEditor inherits from
   # By default: 'ApplicationController'
